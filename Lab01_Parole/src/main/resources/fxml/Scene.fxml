@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.parole.FXMLController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.parole.FXMLController">
    <top>
       <Label text="Lab 1 - Lista di Parole" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -15,7 +18,7 @@
       </Label>
    </top>
    <center>
-      <VBox spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <HBox spacing="10.0">
                <children>
@@ -24,7 +27,11 @@
                   <Button fx:id="btnInserisci" mnemonicParsing="false" onAction="#doInsert" text="Inserisci" />
                </children>
             </HBox>
-            <TextArea fx:id="txtResult" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+            <TextArea fx:id="txtResult" editable="false" prefWidth="200.0" wrapText="true">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextArea>
+            <TextArea fx:id="txtTempo" prefHeight="20.0" />
          </children>
       </VBox>
    </center>
@@ -32,10 +39,19 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <bottom>
-      <Button fx:id="btnReset" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#doReset" text="Reset" BorderPane.alignment="CENTER_RIGHT" />
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnReset" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#doReset" text="Reset">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="144.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#doCancella" text="Cancella">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </bottom>
 </BorderPane>
-
-
-
-

@@ -3,6 +3,7 @@ package it.polito.tdp.parole;
 import it.polito.tdp.parole.model.Parole;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 	
 	Parole elenco ;
+	boolean primaParola=true;
 
     @FXML
     private ResourceBundle resources;
@@ -31,17 +33,50 @@ public class FXMLController {
 
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private TextArea txtTempo;
 
     @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	long startTime=System.nanoTime();
+    	String par=txtParola.getText();
+    	txtParola.setText("");
+    	if(par.compareTo("")==0)
+    		return;
+    	elenco.addParola(par);
+    	LinkedList<String> lista=(LinkedList<String>) elenco.getElenco();
+    	txtResult.clear();
+    	for(String p:lista) {
+    		txtResult.appendText(p+"\n");
+    		} 
+    	long tempoEsecuzione=(System.nanoTime()-startTime)/1000;
+    	txtTempo.setText("Tempo di esecuzione: "+tempoEsecuzione+" microsecondi");
     }
 
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	long startTime=System.nanoTime();
+    	txtResult.clear();
+    	elenco.reset();
+    	long tempoEsecuzione=(System.nanoTime()-startTime)/1000;
+    	txtTempo.setText("Tempo di esecuzione: "+tempoEsecuzione+" microsecondi");
     }
 
+    @FXML
+    void doCancella(ActionEvent event) {
+    	long startTime=System.nanoTime();
+    	String par=txtResult.getSelectedText();
+    	elenco.removeParola(par);
+    	txtResult.clear();
+    	LinkedList<String> lista=(LinkedList<String>) elenco.getElenco();
+    	for(String p:lista) {
+    		txtResult.appendText(p+"\n");
+    		} 	
+    	long tempoEsecuzione=(System.nanoTime()-startTime)/1000;
+    	txtTempo.setText("Tempo di esecuzione: "+tempoEsecuzione+" microsecondi");
+    }
+    
     @FXML
     void initialize() {
         assert txtParola != null : "fx:id=\"txtParola\" was not injected: check your FXML file 'Scene.fxml'.";
