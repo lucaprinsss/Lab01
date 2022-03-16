@@ -1,9 +1,10 @@
 package it.polito.tdp.parole;
 
 import it.polito.tdp.parole.model.Parole;
+import it.polito.tdp.parole.model.ParoleConListe;
 
 import java.net.URL;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.scene.control.TextField;
 
 public class FXMLController {
 	
-	Parole elenco ;
+	ParoleConListe elenco ;
 	boolean primaParola=true;
 
     @FXML
@@ -44,8 +45,10 @@ public class FXMLController {
     	txtParola.setText("");
     	if(par.compareTo("")==0)
     		return;
+    	if(!par.matches("[a-zA-Z ]+"))
+    		return;
     	elenco.addParola(par);
-    	LinkedList<String> lista=(LinkedList<String>) elenco.getElenco();
+    	List<String> lista= elenco.getElenco();
     	txtResult.clear();
     	for(String p:lista) {
     		txtResult.appendText(p+"\n");
@@ -69,7 +72,7 @@ public class FXMLController {
     	String par=txtResult.getSelectedText();
     	elenco.removeParola(par);
     	txtResult.clear();
-    	LinkedList<String> lista=(LinkedList<String>) elenco.getElenco();
+    	List<String> lista=elenco.getElenco();
     	for(String p:lista) {
     		txtResult.appendText(p+"\n");
     		} 	
@@ -84,6 +87,6 @@ public class FXMLController {
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
 
-        elenco = new Parole() ;
+        elenco = new ParoleConListe() ;
     }
 }

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
-public class Parole {
+public class Parole{
 	
 		private TreeMap<String,String> mappaParole;
 		
@@ -19,8 +19,8 @@ public class Parole {
 	}
 	
 	public List<String> getElenco() {
-		Collection<String> col=new LinkedList<String>(mappaParole.values());
-		return (List)col;
+		LinkedList<String> col=new LinkedList<String>(mappaParole.values());
+		return col;
 	}
 	
 	public void reset() {
